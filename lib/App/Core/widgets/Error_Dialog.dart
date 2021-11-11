@@ -48,7 +48,7 @@ void errorDialog(
                 Get.back();
                 Wiredash.of(MyApp.navigatorKey.currentContext!)!.show();
               },
-              buttonWidth: 110,
+              buttonWidth: 115,
             ),
           ],
         ),

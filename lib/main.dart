@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         initialBinding: Binding(),
-        title: 'TMDB Demo',
+        title: 'TMDB Movie App',
         theme: ThemeData(
           primarySwatch: Colors.teal,
           splashColor: Colors.transparent,

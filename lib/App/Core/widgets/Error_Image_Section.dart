@@ -19,7 +19,7 @@ class ErrorImageSection extends GetWidget<HomeController> {
       children: [
         FileNotFound(),
         ButtonWidget(
-          buttonText: "Try Again",
+          buttonText: "No Item Found!",
           onPressed: () {
             controller.callApi(
                 movieMenuItem: MOVIE_MENU[controller.selectedIndex.value]);
