@@ -25,3 +25,10 @@ This is made by TMDB API.In this app u will get popular movie, trending movie, u
   <img src="https://user-images.githubusercontent.com/73518920/141366449-496d07b7-562e-452f-8804-f3fcdac772cd.jpg" width="220" />
   <img src="https://user-images.githubusercontent.com/73518920/141366464-33ec6b80-5369-4d79-960a-96226b0ceb69.jpg" width="220" />
 </p>
+
+<h6>Error Message Ui </h6>
+<p  align="left">
+  <img src="https://user-images.githubusercontent.com/73518920/141366795-81c3dcae-37c5-4d5a-85c6-6c94ad4461fe.jpg" width="220"/>
+  <img src="https://user-images.githubusercontent.com/73518920/141366813-7c9a4eb9-b4a0-4b22-a911-fa32595dc457.jpg" width="220" />
+  <img src="https://user-images.githubusercontent.com/73518920/141366821-9bd5843f-06f7-46d8-aaa7-a9854319d70f.jpg" width="220" />
+</p>
