@@ -6,12 +6,15 @@ import 'package:movie_app_tmdb/App/presentation/WatchTrailerPage/watch_Trailer.d
 import 'package:movie_app_tmdb/App/rotues/App_routes.dart';
 
 class AppPages {
-  static const INTIAL_ROUTE = Routes.Home;
+  static const INTIAL_ROUTE = '/';
 
   static final routes = [
-    GetPage(name: Routes.Home, page:()=> HomeView()),
-    GetPage(name: Routes.MOVIE_DEATILS, page:()=> MovieDetailsView()),
-    GetPage(name: Routes.CAST_PROFILE, page:()=> CastProfileView()),
-    GetPage(name: Routes.WATCH_TRAILER, page:()=> WatchTrailerView()),
+    GetPage(name: Routes.Home, page: () => HomeView()),
+    GetPage(name: Routes.MOVIE_DEATILS, page: () => MovieDetailsView()),
+    GetPage(
+        name: Routes.CAST_PROFILE,
+        page: () => CastProfileView(),
+        transition: Transition.zoom),
+    GetPage(name: Routes.WATCH_TRAILER, page: () => WatchTrailerView()),
   ];
 }

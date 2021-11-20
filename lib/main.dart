@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:movie_app_tmdb/App/Core/widgets/Wiredash.dart';
 
-//* HomeView Page
-import 'package:movie_app_tmdb/App/presentation/HomePage/HomeView.dart';
+//* ViewPort Page
+import 'package:movie_app_tmdb/App/presentation/ViewPort/View_Port.dart';
 import 'package:movie_app_tmdb/App/rotues/App_Pages.dart';
 
 //* Text Theme 
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: AppPages.INTIAL_ROUTE,
         getPages: AppPages.routes,
-        home: HomeView(),
+        home: ViewPort(),
       ),
     );
   }

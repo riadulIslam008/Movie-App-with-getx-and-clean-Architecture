@@ -60,13 +60,15 @@ class HomeController extends GetxController {
 
   late TextEditingController searchController;
   RxList<MovieEntity> movieslist = <MovieEntity>[].obs;
-  RxBool loadingSpiner = true.obs;
-  RxString backGroundImage = "".obs;
-  RxBool showMovieMenuList = true.obs;
   RxList<SearchMoviesEntity> searchList = <SearchMoviesEntity>[].obs;
-  RxBool showFavouriteList = false.obs;
   RxList<MovieEntity> favouriteMovieList = <MovieEntity>[].obs;
+
+  RxBool loadingSpiner = true.obs;
   RxBool searchDataNotFound = false.obs;
+  RxBool showFavouriteList = false.obs;
+  RxBool showMovieMenuList = true.obs;
+
+  RxString backGroundImage = "".obs;
 
   @override
   void onInit() {
@@ -183,6 +185,7 @@ class HomeController extends GetxController {
 
 //* ===================== Get Search Moovies ============= //
   void getSearchMovieList({required String searchString}) async {
+    searchList.clear();
     searchDataNotFound.value = false;
     GetSearchMovies getSearchMovies = GetSearchMovies(_movieRepository);
     final Either<AppError, List<SearchMoviesEntity>> eitherRepo =
@@ -191,9 +194,8 @@ class HomeController extends GetxController {
     eitherRepo.fold((l) {
       searchDataNotFound.value = true;
     }, (r) {
-      if(r.isEmpty) searchDataNotFound.value = true;
+      if (r.isEmpty) searchDataNotFound.value = true;
       searchList.value = r;
-
     });
   }
 
