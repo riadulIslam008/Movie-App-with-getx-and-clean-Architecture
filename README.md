@@ -3,7 +3,7 @@
 
 <h2>App Details </h2>
 This is made by TMDB API.In this app u will get popular movie, trending movie, upcoming movie.And also u can see movie trailer from youtube api. 
-<h6> Core Feature </h6>
+<h2> Core Feature </h2>
 <h5>U can store ur favourite movies.</h5>
 <h5>U can watch trailer or movie related video .</h5>
 <h5>U can see cast info of any movie.</h5>
