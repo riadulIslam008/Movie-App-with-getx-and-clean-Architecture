@@ -4,11 +4,12 @@ import 'package:get/get.dart';
 import 'package:movie_app_tmdb/App/presentation/MovieDetailsPage/Movie_Details_Controller.dart';
 
 class FavouriteIcon extends GetWidget<MovieDetailsController> {
-  const FavouriteIcon({Key? key}) : super(key: key);
+  const FavouriteIcon( {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+  
+    return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +35,7 @@ class FavouriteIcon extends GetWidget<MovieDetailsController> {
               },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
-                radius: 20,
+                radius: 20 ,
                 child: Icon(
                   controller.favouriteMovie.value
                       ? CupertinoIcons.heart_circle_fill

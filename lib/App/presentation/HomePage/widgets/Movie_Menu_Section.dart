@@ -16,8 +16,17 @@ class MovieMenuSection extends GetWidget<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: movieMenuArgument.screenWidth,
-      color: movieMenuArgument.backgroundColor,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.black.withOpacity(0.5),
+            Colors.black.withOpacity(0.3),
+          ],
+          stops: [0.0, 1.0],
+        ),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

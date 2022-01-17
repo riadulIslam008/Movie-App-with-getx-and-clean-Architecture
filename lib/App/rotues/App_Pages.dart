@@ -9,7 +9,7 @@ class AppPages {
   static const INTIAL_ROUTE = '/';
 
   static final routes = [
-    GetPage(name: Routes.Home, page: () => HomeView()),
+    GetPage(name: INTIAL_ROUTE, page: () => HomeView()),
     GetPage(name: Routes.MOVIE_DEATILS, page: () => MovieDetailsView()),
     GetPage(
         name: Routes.CAST_PROFILE,

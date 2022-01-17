@@ -3,16 +3,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app_tmdb/App/Core/assets/NetworkImage.dart';
+import 'package:movie_app_tmdb/App/Core/utils/screenSize.dart';
 import 'package:movie_app_tmdb/App/presentation/MovieDetailsPage/Movie_Details_Controller.dart';
 
 class CastDetails extends GetWidget<MovieDetailsController> {
   final List castList;
-  const CastDetails({Key? key, required this.castList}) : super(key: key);
+   CastDetails({Key? key, required this.castList}) : super(key: key);
+
+  final double castImageHeight = screenHeight / 3;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180,
+      height: castImageHeight,
       child: ListView.builder(
         itemCount: castList.length,
         shrinkWrap: true,
@@ -32,15 +35,15 @@ class CastDetails extends GetWidget<MovieDetailsController> {
                     ),
                     padding: const EdgeInsets.only(left: 10),
                     child: Hero(
-                       tag: castList[index].profilePic,
-                       transitionOnUserGestures: true,
+                      tag: castList[index].profilePic,
+                      transitionOnUserGestures: true,
                       child: Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
                           CachedNetworkImage(
-                            imageUrl:
-                                baseImageUrl(path: castList[index].profilePic!.toString()),
-                            height: 200,
+                            imageUrl: baseImageUrl(
+                                path: castList[index].profilePic!.toString()),
+                            height: castImageHeight,
                             width: 120,
                             fit: BoxFit.cover,
                           ),

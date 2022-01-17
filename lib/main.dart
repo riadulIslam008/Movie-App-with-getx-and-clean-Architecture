@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:movie_app_tmdb/App/Core/widgets/Wiredash.dart';
 
 //* ViewPort Page
-import 'package:movie_app_tmdb/App/presentation/ViewPort/View_Port.dart';
+// import 'package:movie_app_tmdb/App/presentation/ViewPort/View_Port.dart';
 import 'package:movie_app_tmdb/App/rotues/App_Pages.dart';
 
 //* Text Theme 
@@ -35,12 +35,12 @@ class MyApp extends StatelessWidget {
         title: 'TMDB Movie App',
         theme: ThemeData(
           primarySwatch: Colors.teal,
-          splashColor: Colors.transparent,
+           splashColor: Colors.transparent,
           textTheme: textTheme,
         ),
         initialRoute: AppPages.INTIAL_ROUTE,
         getPages: AppPages.routes,
-        home: ViewPort(),
+       // home: ViewPort(),
       ),
     );
   }

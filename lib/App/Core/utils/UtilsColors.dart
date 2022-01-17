@@ -10,3 +10,4 @@ const Color redColor = Colors.red;
 const Color vulcan = Color(0xFF121221);
 const Color royalBlue = Color(0xFF604FEF);
 const Color voilet = Color(0xFFA74DBC);
+const Color teal = Colors.teal;

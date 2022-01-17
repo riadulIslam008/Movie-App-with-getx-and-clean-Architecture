@@ -18,11 +18,11 @@ TextTheme textTheme = TextTheme(
     fontWeight: FontWeight.w500,
   ),
   headline5: TextStyle(
-    color: royalBlue,
+    color: teal,
     fontSize: 20,
   ),
   headline6: TextStyle(
-    color: white54,
+    color:  Colors.white,
     fontSize: 17,
   ),
   subtitle1: TextStyle(

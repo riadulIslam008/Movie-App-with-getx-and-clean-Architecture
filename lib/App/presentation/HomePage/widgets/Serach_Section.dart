@@ -14,7 +14,7 @@ class SearchSection extends GetWidget<HomeController> {
   Widget build(BuildContext context) {
     return Container(
       height: searchArgument.screenHeight * 0.08,
-      color: searchArgument.black54,
+      color: Colors.transparent,
       child: Row(
         children: [
           Expanded(
@@ -29,7 +29,7 @@ class SearchSection extends GetWidget<HomeController> {
                       searchString: controller.searchController.value.text);
                 }
               },
-              // cursorColor: Colors.transparent,
+            
               cursorHeight: 22,
               cursorWidth: 4,
               decoration: InputDecoration(

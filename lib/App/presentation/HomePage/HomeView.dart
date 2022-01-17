@@ -10,9 +10,9 @@ import 'package:movie_app_tmdb/App/Core/utils/screenSize.dart';
 
 //* Home Controller
 import 'package:movie_app_tmdb/App/presentation/HomePage/HomeController.dart';
-import 'package:movie_app_tmdb/App/presentation/HomePage/widgets/Expansion_Tile_Section.dart';
 
 //* Expansion Tile section
+import 'package:movie_app_tmdb/App/presentation/HomePage/widgets/Expansion_Tile_Section.dart';
 
 //* Load Spiner
 import 'package:movie_app_tmdb/App/presentation/loadingPage/LoadingSpiner.dart';

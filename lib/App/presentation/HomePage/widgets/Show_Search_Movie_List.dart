@@ -12,12 +12,12 @@ import 'package:movie_app_tmdb/App/presentation/loadingPage/LoadingSpiner.dart';
 
 class ShowSearchMovieList extends GetWidget<HomeController> {
   final double screenWidth;
-  final Color backgroundColor;
+
 
   const ShowSearchMovieList({
     Key? key,
     required this.screenWidth,
-    required this.backgroundColor,
+
   }) : super(key: key);
 
   @override

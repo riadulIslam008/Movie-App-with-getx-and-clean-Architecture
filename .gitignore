@@ -45,4 +45,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-/App/data/api/ApiInfo/ApiConstants.dart
+/lib/App/data/api/ApiInfo/ApiConstants.dart

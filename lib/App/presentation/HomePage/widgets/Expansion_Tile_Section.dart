@@ -27,13 +27,15 @@ class ExpansionTileSection extends GetWidget<HomeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Padding(
-        padding: const EdgeInsets.only(left: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: screenHeight * 0.032),
+            SizedBox(height: screenHeight * 0.034),
             ExpansionPanelList(
-               elevation:  0,
+             
+              expandedHeaderPadding: EdgeInsets.zero,
+              elevation: 0,
               animationDuration: Duration(milliseconds: 300),
               children: [
                 ExpansionPanel(
@@ -51,27 +53,21 @@ class ExpansionTileSection extends GetWidget<HomeController> {
                     ),
                   ),
                   body: controller.showMovieMenuList.value
-                      ? Padding(
-                          padding: const EdgeInsets.only(right: 60.0),
-                          child: MovieMenuSection(
-                            movieMenuArgument: MovieMenuArgument(
-                              screenWidth - 60,
-                              black54.withOpacity(0.9),
-                              Colors.white,
-                              Theme.of(context).textTheme.headline5!,
-                              Theme.of(context).textTheme.headline6!,
-                              MOVIE_MENU,
-                            ),
-                          ),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.only(right: 60.0),
-                          child: ShowSearchMovieList(
-                            screenWidth: screenWidth,
-                            backgroundColor: black54,
-                          ),
+                      ? MovieMenuSection(
+                        movieMenuArgument: MovieMenuArgument(
+                         
+                          black54.withOpacity(0.9),
+                          Colors.white,
+                          Theme.of(context).textTheme.headline5!,
+                          Theme.of(context).textTheme.headline6!,
+                          MOVIE_MENU,
                         ),
+                      )
+                      : ShowSearchMovieList(
+                        screenWidth: screenWidth,
+                      ),
                   isExpanded: controller.isExpanded.value,
+                  
                 ),
               ],
             ),
