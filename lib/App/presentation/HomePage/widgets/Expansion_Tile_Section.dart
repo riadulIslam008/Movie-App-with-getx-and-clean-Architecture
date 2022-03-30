@@ -34,41 +34,44 @@ class ExpansionTileSection extends GetWidget<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: screenHeight * 0.034),
-                  ExpansionPanelList(
-                    expandedHeaderPadding: EdgeInsets.zero,
-                    elevation: 0,
-                    animationDuration: Duration(milliseconds: 300),
-                    children: [
-                      ExpansionPanel(
-                        backgroundColor: Colors.transparent,
-                        headerBuilder: (context, isExpanded) => SearchSection(
-                          searchArgument: SearchArgument(
-                            hintText: "Search...",
-                            searchIcon: Icons.search,
-                            screenHeight: screenHeight,
-                            black54: black54,
-                            white54: white54,
-                            black38: black38,
-                            textTheme: Theme.of(context).textTheme.headline6!,
-                            searchController: controller.searchController,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: ExpansionPanelList(
+                      expandedHeaderPadding: EdgeInsets.zero,
+                      elevation: 0,
+                      animationDuration: Duration(milliseconds: 300),
+                      children: [
+                        ExpansionPanel(
+                          backgroundColor: Colors.transparent,
+                          headerBuilder: (context, isExpanded) => SearchSection(
+                            searchArgument: SearchArgument(
+                              hintText: "Search...",
+                              searchIcon: Icons.search,
+                              screenHeight: screenHeight,
+                              black54: black54,
+                              white54: white54,
+                              black38: black38,
+                              textTheme: Theme.of(context).textTheme.headline6!,
+                              searchController: controller.searchController,
+                            ),
                           ),
-                        ),
-                        body: controller.showMovieMenuList.value
-                            ? MovieMenuSection(
-                                movieMenuArgument: MovieMenuArgument(
-                                  black54.withOpacity(0.9),
-                                  Colors.white,
-                                  Theme.of(context).textTheme.headline5!,
-                                  Theme.of(context).textTheme.headline6!,
-                                  MOVIE_MENU,
+                          body: controller.showMovieMenuList.value
+                              ? MovieMenuSection(
+                                  movieMenuArgument: MovieMenuArgument(
+                                    black54.withOpacity(0.9),
+                                    Colors.white,
+                                    Theme.of(context).textTheme.headline5!,
+                                    Theme.of(context).textTheme.headline6!,
+                                    MOVIE_MENU,
+                                  ),
+                                )
+                              : ShowSearchMovieList(
+                                  screenWidth: screenWidth,
                                 ),
-                              )
-                            : ShowSearchMovieList(
-                                screenWidth: screenWidth,
-                              ),
-                        isExpanded: controller.isExpanded.value,
-                      ),
-                    ],
+                          isExpanded: controller.isExpanded.value,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
