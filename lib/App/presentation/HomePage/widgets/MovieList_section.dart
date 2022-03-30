@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 //* Getx and Home Controller
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:movie_app_tmdb/App/Core/utils/const_string.dart';
 import 'package:movie_app_tmdb/App/Core/widgets/Error_Image_Section.dart';
+import 'package:movie_app_tmdb/App/data/models/Hive/hive_db.dart';
 import 'package:movie_app_tmdb/App/presentation/HomePage/HomeController.dart';
 
 //* Base Image Url Path
@@ -26,114 +29,138 @@ class MovieListSection extends GetWidget<HomeController> {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Obx(
-          () => controller.movieslist.length != 0
-              ? ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: controller.movieslist.length,
-                  primary: false,
-                  itemBuilder: (context, index) {
-                    //Todo ====== veriable Section ==========
-                    var movieList = controller.movieslist[index];
-                    int movieID = movieList.id;
-                    String imageUrl = baseImageUrl(path: movieList.posterPath);
+        child: ValueListenableBuilder<Box<FavouriteMovieListModel>>(
+            valueListenable:
+                Hive.box<FavouriteMovieListModel>(hiveDBname).listenable(),
+            builder: (context, value, child) {
+              controller.favouriteMovieList =
+                  value.values.toList().cast<FavouriteMovieListModel>();
+              return Obx(
+                () => controller.movieslist.length != 0
+                    ? ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: controller.buttonName.value == MOVIE_MENU[4]
+                            ? controller.favouriteMovieList.length
+                            : controller.movieslist.length,
+                        primary: false,
+                        itemBuilder: (context, index) {
+                          //Todo ====== veriable Section ==========
 
-                    String title = movieList.title;
-                    String lan =
-                        movieList.language.replaceAll("OriginalLanguage.", "");
-                    bool adult = movieList.adult;
-                    String releaseDate =
-                        movieList.releaseDate.toString().substring(0, 11);
+                          var movieList =
+                              controller.buttonName.value == MOVIE_MENU[4]
+                                  ? controller.favouriteMovieList[index]
+                                  : controller.movieslist[index];
+                          int movieID = movieList.id;
+                          String imageUrl =
+                              baseImageUrl(path: movieList.posterPath);
 
-                    String overView = movieList.overview;
+                          String title = movieList.title;
+                          String lan = movieList.language
+                                  .replaceAll("OriginalLanguage.", "") ??
+                              "";
+                          bool adult = movieList.adult ?? false;
+                          String releaseDate =
+                              movieList.releaseDate.toString().substring(0, 11);
 
-                    double movieRating = movieList.voteAverage;
-                    //Todo ====== veriable Section ==========//
+                          String overView = movieList.overview;
 
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 20),
-                      height: movieContainerHeight,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          GestureDetector(
-                            child: Hero(
-                              tag: imageUrl,
-                              child: MoviePoster(
-                                  imageUrl: imageUrl,
-                                  screenHeight: movieContainerHeight),
-                            ),
-                            onTap: () {
-                              controller.backGroundImageChange(index);
-                            },
-                          ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                controller.movieDetailscall(movieId: movieID);
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    title,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
+                          double movieRating = movieList.voteAverage;
+                          //Todo ====== veriable Section ==========//
+
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            height: movieContainerHeight,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  child: Hero(
+                                    tag: imageUrl,
+                                    child: MoviePoster(
+                                        imageUrl: imageUrl,
+                                        screenHeight: movieContainerHeight),
                                   ),
-                                  if (controller.showFavouriteList.value) ...[
-                                    SizedBox.shrink(),
-                                  ] else ...[
-                                    SizedBox(height: 8),
-                                    Text("$lan | R: $adult |  $releaseDate",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!),
-                                  ],
-                                  SizedBox(height: 13),
-                                  Text(
-                                    overView,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 5,
-                                    style:
-                                        Theme.of(context).textTheme.subtitle2!,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          controller.showFavouriteList.value
-                              ? GestureDetector(
                                   onTap: () {
-                                    controller.deleteMovieFromDatabase(
-                                        movieID: movieList.id);
+                                    controller.backGroundImageChange(index);
                                   },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 12.0),
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 20,
-                                      child: Icon(
-                                        CupertinoIcons.heart_circle_fill,
-                                        color: Colors.red,
-                                      ),
+                                ),
+                                SizedBox(width: 10),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      controller.movieDetailscall(
+                                          movieId: movieID, index: index);
+                                    },
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          title,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6,
+                                        ),
+                                        if (controller
+                                            .showFavouriteList.value) ...[
+                                          SizedBox.shrink(),
+                                        ] else ...[
+                                          SizedBox(height: 8),
+                                          Text(
+                                              "$lan | R: $adult |  $releaseDate",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle1!),
+                                        ],
+                                        SizedBox(height: 13),
+                                        Text(
+                                          overView,
+                                          overflow: TextOverflow.clip,
+                                          maxLines: 5,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle2!,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                )
-                              : Text(
-                                  movieRating.toString(),
-                                  style: Theme.of(context).textTheme.headline6,
-                                )
-                        ],
-                      ),
-                    );
-                  },
-                )
-              : ErrorImageSection(),
-        ),
+                                ),
+                                controller.showFavouriteList.value
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          controller.deleteMovieFromHive(
+                                              movieID: index);
+                                        },
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 12.0),
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            radius: 20,
+                                            child: Icon(
+                                              CupertinoIcons.heart_circle_fill,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : Text(
+                                        movieRating.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6,
+                                      )
+                              ],
+                            ),
+                          );
+                        },
+                      )
+                    : ErrorImageSection(),
+              );
+            }),
       ),
     );
   }

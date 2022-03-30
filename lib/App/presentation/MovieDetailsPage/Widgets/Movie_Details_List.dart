@@ -18,7 +18,7 @@ class MovieDetailsList extends StatelessWidget {
     return ClipPath(
       clipper: ContainerCliper(),
       child: Container(
-        padding: EdgeInsets.only(left: screenWidth * 0.32),
+        padding: EdgeInsets.only(left: screenWidth > 400? 400 * 0.32: screenWidth* 0.32),
         color: vulcan,
         height: screenHeight * 0.12,
         child: Stack(

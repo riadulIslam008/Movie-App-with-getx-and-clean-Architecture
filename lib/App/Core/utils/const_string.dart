@@ -28,3 +28,4 @@ const String BIOGRAPHY = "Biography";
 const String WATCH_TRAILER = "Watch Trailer";
 const String STORY_LINE = "Storyline";
 const String CAST = "Cast";
+const String hiveDBname="MovieTable";

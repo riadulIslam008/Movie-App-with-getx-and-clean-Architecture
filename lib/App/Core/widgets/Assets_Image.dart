@@ -12,6 +12,7 @@ class FileNotFound extends StatelessWidget {
       child: Image.asset(
         FILE_NOT_FOUND,
         width: screenWidth,
+        height: screenHeight * 0.60,
       ),
     );
   }

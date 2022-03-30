@@ -17,6 +17,7 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+     
       width: buttonWidth,
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -31,9 +32,12 @@ class ButtonWidget extends StatelessWidget {
         child: MaterialButton(
           highlightColor: Colors.transparent,
           onPressed: onPressed,
-          child: Text(
-            buttonText,
-            style: buttonStyle,
+          child: Padding(
+             padding: EdgeInsets.symmetric(vertical: 10),
+            child: Text(
+              buttonText,
+              style: buttonStyle,
+            ),
           ),
         ),
       ),

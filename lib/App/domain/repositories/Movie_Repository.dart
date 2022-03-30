@@ -1,4 +1,6 @@
 //* Movie_Entity
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:movie_app_tmdb/App/data/models/Hive/hive_db.dart';
 import 'package:movie_app_tmdb/App/domain/entites/Cast_Entity.dart';
 import 'package:movie_app_tmdb/App/domain/entites/Cast_Personal_Entity.dart';
 import 'package:movie_app_tmdb/App/domain/entites/Movie_Details_Entity.dart';
@@ -30,5 +32,8 @@ abstract class MovieRepository {
 
   Future<Either<AppError, void>> saveMovieTable({required MovieEntity movieEntity});
   Future<Either<AppError, List<MovieEntity>>> getMovieTable();
+  Future<Either<AppError, void>> saveMovieInHive({required FavouriteMovieListModel movieEntity});
+  Future<Either<AppError, FavouriteMovieListModel>> getFavouriteMovieFromHive();
   Future<Either<AppError, void>> deleteMovieTable({required int id});
+  Future<Either<AppError, void>> deleteMovieFromHive({required int id});
 }

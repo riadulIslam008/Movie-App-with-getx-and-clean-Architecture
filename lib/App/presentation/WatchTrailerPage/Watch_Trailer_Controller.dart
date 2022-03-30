@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:movie_app_tmdb/App/domain/entites/Video_Entity.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class WatchTrailerControlller extends GetxController {
   List<VideoEntity> videoEntity;
@@ -16,26 +16,26 @@ class WatchTrailerControlller extends GetxController {
 
   int selectedIndex = 0;
   YoutubePlayerController? youtubePlayerController;
-  initialYoutubePlayer({required int selected}) {
+  void initialYoutubePlayer({required int selected}) {
     youtubePlayerController = YoutubePlayerController(
       initialVideoId: videoEntity[selected].key,
-      flags: YoutubePlayerFlags(
+      params: YoutubePlayerParams(
         autoPlay: true,
         captionLanguage: "en",
       ),
     );
-    update();
+     update();
   }
 
   @override
   void dispose() {
-    youtubePlayerController!.dispose();
+    youtubePlayerController!.close();
     super.dispose();
   }
 
   @override
   void onClose() {
-    youtubePlayerController!.dispose();
+    youtubePlayerController!.close();
     super.onClose();
   }
 

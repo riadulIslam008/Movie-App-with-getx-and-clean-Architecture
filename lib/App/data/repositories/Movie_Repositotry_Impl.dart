@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:hive/hive.dart';
 
 //* AppError
 import 'package:movie_app_tmdb/App/Core/errors/AppError.dart';
@@ -10,6 +11,7 @@ import 'package:movie_app_tmdb/App/Core/errors/Custome_Error.dart';
 //* Const String
 import 'package:movie_app_tmdb/App/Core/utils/const_string.dart';
 import 'package:movie_app_tmdb/App/data/dataSources/local/Local_Data_Source.dart';
+import 'package:movie_app_tmdb/App/data/dataSources/local/Local_Hive_Data.dart';
 
 //* Remote data Sources
 import 'package:movie_app_tmdb/App/data/dataSources/remote/remote_data_sources.dart';
@@ -17,6 +19,7 @@ import 'package:movie_app_tmdb/App/data/dataSources/remote/remote_data_sources.d
 //*Model
 import 'package:movie_app_tmdb/App/data/models/Cast_Details.dart';
 import 'package:movie_app_tmdb/App/data/models/Cast_Person_Details.dart';
+import 'package:movie_app_tmdb/App/data/models/Hive/hive_db.dart';
 import 'package:movie_app_tmdb/App/data/models/MovieDetails.dart';
 import 'package:movie_app_tmdb/App/data/models/MovieModel.dart';
 import 'package:movie_app_tmdb/App/data/models/Movie_Table.dart';
@@ -30,7 +33,9 @@ import 'package:movie_app_tmdb/App/domain/repositories/Movie_Repository.dart';
 class MovieRepositoryImpl extends MovieRepository {
   final MovieRemoteDataSources _remoteDataSources;
   final LocalDataSource _localDataSource;
-  MovieRepositoryImpl(this._remoteDataSources, this._localDataSource);
+  final LocalHiveData _localHiveData;
+  MovieRepositoryImpl(
+      this._remoteDataSources, this._localDataSource, this._localHiveData);
 
   @override
   Future<Either<AppError, List<MovieModel>>> getPopular() async {
@@ -190,5 +195,37 @@ class MovieRepositoryImpl extends MovieRepository {
         return Left(AppError("The resource you requested could not be found."));
     }
     return Left(AppError(UNKNOWN_ERROR));
+  }
+
+  @override
+  Future<Either<AppError, void>> saveMovieInHive(
+      {required FavouriteMovieListModel movieEntity}) async {
+    try {
+      final response = await _localHiveData.saveFavouriteMovies(movieEntity);
+      return Right(response);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<AppError, FavouriteMovieListModel>>
+      getFavouriteMovieFromHive() async {
+    try {
+      final reponse = await _localHiveData.getFavouriteMovies();
+      return Right(reponse);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<AppError, void>> deleteMovieFromHive({required int id}) async {
+    try {
+      final response = await _localHiveData.deleteFromHive(id);
+      return Right(response);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
   }
 }

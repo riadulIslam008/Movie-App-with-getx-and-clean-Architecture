@@ -36,116 +36,121 @@ class MovieDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: vulcan,
-      body: Stack(
-        children: [
-          GetBuilder<MovieDetailsController>(
-            builder: (controller) {
-              if (controller.movieDetailsEntity == null) {
-                return LoadingSpiner();
-              } else {
-                final movieInfos = controller.movieDetailsEntity!;
-                return CustomScrollView(
-                  slivers: [
-                    SliverPersistentHeader(
-                      //* Cover photo
-                      delegate: CoverPhoto(
-                        movieTitle: movieInfos.movieName,
-                        movieGenres: movieInfos.movieGenres,
-                        posterPath: baseImageUrl(path: movieInfos.posterPath),
-                        backGroundImage:
-                            baseImageUrl(path: movieInfos.backDropPath),
-                        screenHeight: screenHeight,
-                        uploadLimit: uploadLimit,
-                      ),
-                    ),
+      body: Center(
+        child: SizedBox(
+          width: screenWidth> 400? 400 : screenWidth,
+          child: Stack(
+            children: [
+              GetBuilder<MovieDetailsController>(
+                builder: (controller) {
+                  if (controller.movieDetailsEntity == null) {
+                    return LoadingSpiner();
+                  } else {
+                    final movieInfos = controller.movieDetailsEntity!;
+                    return CustomScrollView(
+                      slivers: [
+                        SliverPersistentHeader(
+                          //* Cover photo
+                          delegate: CoverPhoto(
+                            movieTitle: movieInfos.movieName,
+                            movieGenres: movieInfos.movieGenres,
+                            posterPath: baseImageUrl(path: movieInfos.posterPath),
+                            backGroundImage:
+                                baseImageUrl(path: movieInfos.backDropPath),
+                            screenHeight: screenHeight,
+                            uploadLimit: uploadLimit,
+                          ),
+                        ),
 
-                    //* Body Section
-                    SliverToBoxAdapter(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 10),
-                          //* Info section
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        //* Body Section
+                        SliverToBoxAdapter(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              MovieInfo(
-                                icon: Icons.star_outline_sharp,
-                                value: controller
-                                    .movieDetailsEntity!.voteAverage
-                                    .toString(),
+                              SizedBox(height: 10),
+                              //* Info section
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  MovieInfo(
+                                    icon: Icons.star_outline_sharp,
+                                    value: controller
+                                        .movieDetailsEntity!.voteAverage
+                                        .toString(),
+                                  ),
+                                  MovieInfo(
+                                      icon: Icons.tv_outlined,
+                                      value: "${movieInfos.companyName[0].name}m"),
+                                  MovieInfo(
+                                      icon: Icons.slow_motion_video_rounded,
+                                      value: "${movieInfos.runtime.toString()}m"),
+                                  MovieInfo(
+                                      icon: Icons.av_timer_outlined,
+                                      value:
+                                          "${movieInfos.releaseDate.toString().substring(0, 11)}"),
+                                ],
                               ),
-                              MovieInfo(
-                                  icon: Icons.tv_outlined,
-                                  value: "${movieInfos.companyName[0].name}m"),
-                              MovieInfo(
-                                  icon: Icons.slow_motion_video_rounded,
-                                  value: "${movieInfos.runtime.toString()}m"),
-                              MovieInfo(
-                                  icon: Icons.av_timer_outlined,
-                                  value:
-                                      "${movieInfos.releaseDate.toString().substring(0, 11)}"),
+                              SizedBox(height: 10),
+                              Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: TitleText(title: CAST)),
+                              SizedBox(height: 10),
+
+                              //* Cast
+                              controller.castList == null
+                                  ? LoadingSpiner()
+                                  : CastDetails(castList: controller.castList!),
+
+                              //* Story Line
+                              SizedBox(height: 10),
+
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 15.0, right: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TitleText(title: STORY_LINE),
+                                    SizedBox(height: 7),
+                                    Text(
+                                      movieInfos.movieOverview,
+                                      style: Theme.of(context).textTheme.subtitle1,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 20),
+
+                              //* ================= Bottom Button ===================//
+                              controller.videoEntity == null
+                                  ? SizedBox.shrink()
+                                  : Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      width: screenWidth,
+                                      alignment: Alignment.bottomCenter,
+                                      child: ButtonWidget(
+                                        buttonText: WATCH_TRAILER,
+                                        buttonWidth: screenWidth,
+                                        onPressed: () {
+                                          controller.trailerPage();
+                                        },
+                                        buttonStyle:
+                                            Theme.of(context).textTheme.bodyText1!,
+                                      ),
+                                    ),
                             ],
                           ),
-                          SizedBox(height: 10),
-                          Padding(
-                              padding: const EdgeInsets.only(left: 15.0),
-                              child: TitleText(title: CAST)),
-                          SizedBox(height: 10),
-
-                          //* Cast
-                          controller.castList == null
-                              ? LoadingSpiner()
-                              : CastDetails(castList: controller.castList!),
-
-                          //* Story Line
-                          SizedBox(height: 10),
-
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 15.0, right: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TitleText(title: STORY_LINE),
-                                SizedBox(height: 7),
-                                Text(
-                                  movieInfos.movieOverview,
-                                  style: Theme.of(context).textTheme.subtitle1,
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 20),
-
-                          //* ================= Bottom Button ===================//
-                          controller.videoEntity == null
-                              ? SizedBox.shrink()
-                              : Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  width: screenWidth,
-                                  alignment: Alignment.bottomCenter,
-                                  child: ButtonWidget(
-                                    buttonText: WATCH_TRAILER,
-                                    buttonWidth: screenWidth,
-                                    onPressed: () {
-                                      controller.trailerPage();
-                                    },
-                                    buttonStyle:
-                                        Theme.of(context).textTheme.bodyText1!,
-                                  ),
-                                ),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              }
-            },
+                        ),
+                      ],
+                    );
+                  }
+                },
+              ),
+             
+            ],
           ),
-         
-        ],
+        ),
       ),
     );
   }

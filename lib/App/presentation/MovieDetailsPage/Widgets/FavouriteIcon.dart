@@ -30,7 +30,7 @@ class FavouriteIcon extends GetWidget<MovieDetailsController> {
                 controller.favouriteMovie.value =
                     !controller.favouriteMovie.value;
                 controller.favouriteMovie.value
-                    ? controller.addInFavouriteMovie()
+                    ? controller.saveFavouriteMovieInHiveDb()
                     : controller.deleteFavoriteMovie();
               },
               child: CircleAvatar(

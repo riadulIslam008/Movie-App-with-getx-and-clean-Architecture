@@ -2,6 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 //* Network Image Function folder
 import 'package:movie_app_tmdb/App/Core/assets/NetworkImage.dart';
@@ -15,23 +16,16 @@ import 'package:movie_app_tmdb/App/Core/utils/const_string.dart';
 //* Dialog Box
 import 'package:movie_app_tmdb/App/Core/widgets/About_Dialog_Box.dart';
 import 'package:movie_app_tmdb/App/Core/widgets/Error_Dialog.dart';
+import 'package:movie_app_tmdb/App/data/models/Hive/hive_db.dart';
 
 //* Movie Entity
 import 'package:movie_app_tmdb/App/domain/entites/Movie_entity.dart';
 import 'package:movie_app_tmdb/App/domain/entites/NoParams.dart';
-import 'package:movie_app_tmdb/App/domain/entites/Movie_Param.dart';
 import 'package:movie_app_tmdb/App/domain/entites/Movie_Search_Param.dart';
 import 'package:movie_app_tmdb/App/domain/entites/Search_Movies_Entitty.dart';
 
 //* Movie Repository
 import 'package:movie_app_tmdb/App/domain/repositories/Movie_Repository.dart';
-
-//* Use Case
-import 'package:movie_app_tmdb/App/domain/useCases/Save_MovieTable.dart';
-import 'package:movie_app_tmdb/App/domain/useCases/delete_Movie_Table.dart';
-
-//* Favourite Movie Api Call
-import 'package:movie_app_tmdb/App/domain/useCases/get_Favourite_Movie_Table.dart';
 
 //* Search Movie Api Call
 import 'package:movie_app_tmdb/App/domain/useCases/get_Search_Movies.dart';
@@ -59,9 +53,9 @@ class HomeController extends GetxController {
   //* =============== UI Code ================
 
   late TextEditingController searchController;
-  RxList<MovieEntity> movieslist = <MovieEntity>[].obs;
+  var movieslist = [].obs;
   RxList<SearchMoviesEntity> searchList = <SearchMoviesEntity>[].obs;
-  RxList<MovieEntity> favouriteMovieList = <MovieEntity>[].obs;
+  var favouriteMovieList = [];
 
   RxBool loadingSpiner = true.obs;
   RxBool searchDataNotFound = false.obs;
@@ -74,13 +68,13 @@ class HomeController extends GetxController {
   void onInit() {
     searchController = TextEditingController();
     callApi(movieMenuItem: MOVIE_MENU[selectedIndex.value]);
-    favouriteMovies();
     super.onInit();
   }
 
   @override
   void onClose() {
     searchController.dispose();
+    Hive.close();
     super.onClose();
   }
 
@@ -206,7 +200,7 @@ class HomeController extends GetxController {
 
   //* ================= Movie Details section ========
 
-  void movieDetailscall({required int movieId}) {
+  void movieDetailscall({required int movieId, required int index}) {
     bool checkFav = false;
     for (var i = 0; i < favouriteMovieList.length; i++) {
       if (favouriteMovieList[i].id == movieId) checkFav = true;
@@ -214,32 +208,51 @@ class HomeController extends GetxController {
     Binding().movieDetailsPage(
         movieRepository: _movieRepository,
         movieID: movieId,
-        favouriteMovie: checkFav);
+        favouriteMovie: checkFav, index: index);
     Get.toNamed(Routes.MOVIE_DEATILS);
   }
 
   //* ============= Local Data Function =============
-  void favouriteMovies() async {
-    GetFavouriteMovie getFavouriteMovie = GetFavouriteMovie(_movieRepository);
-    final Either<AppError, List<MovieEntity>> eitherRepo =
-        await getFavouriteMovie(NoParam());
+  // void favouriteMovies() async {
+  //   GetFavouriteMovie getFavouriteMovie = GetFavouriteMovie(_movieRepository);
+  //   final Either<AppError, List<MovieEntity>> eitherRepo =
+  //       await getFavouriteMovie(NoParam());
 
-    eitherRepo.fold((l) {
-      print(l.errorMerrsage);
-    }, (r) {
-      favouriteMovieList.value = r;
-    });
+  //   eitherRepo.fold((l) {
+  //     print(l.errorMerrsage);
+  //   }, (r) {
+  //     favouriteMovieList.value = r;
+  //   });
+  // }
+
+  // void saveInDatabase({required MovieEntity movieEntity}) async {
+  //   SaveMovieTable saveMovieTable = SaveMovieTable(_movieRepository);
+  //   await saveMovieTable(movieEntity);
+  //   favouriteMovies();
+  // }
+
+  // void deleteMovieFromDatabase({required int movieID}) async {
+  //   DeleteMovieTable deleteMovie = DeleteMovieTable(_movieRepository);
+  //   await deleteMovie(MovieParam(movieID));
+  //   favouriteMovies();
+  // }
+
+  //* ============= Local Data From Hive=============
+  void favouriteMoviesFromHive() async {
+    final box = await Hive.box<FavouriteMovieListModel>(hiveDBname);
+    var data = box.get(hiveDBname);
+    print(data);
   }
 
-  void saveInDatabase({required MovieEntity movieEntity}) async {
-    SaveMovieTable saveMovieTable = SaveMovieTable(_movieRepository);
-    await saveMovieTable(movieEntity);
-    favouriteMovies();
+  void saveInHive({required FavouriteMovieListModel movieEntity}) async {
+    final box = Hive.box<FavouriteMovieListModel>(hiveDBname);
+    int id = await box.add(movieEntity);
+    print("ID: $id");
   }
 
-  void deleteMovieFromDatabase({required int movieID}) async {
-    DeleteMovieTable deleteMovie = DeleteMovieTable(_movieRepository);
-    await deleteMovie(MovieParam(movieID));
-    favouriteMovies();
+  void deleteMovieFromHive({required int movieID}) async {
+    final box = Hive.box<FavouriteMovieListModel>(hiveDBname);
+    print("Index: $movieID");
+    await box.deleteAt(movieID);
   }
 }

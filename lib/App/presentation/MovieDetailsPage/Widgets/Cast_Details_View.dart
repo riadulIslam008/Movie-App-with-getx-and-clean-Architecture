@@ -51,22 +51,24 @@ class CastDetails extends GetWidget<MovieDetailsController> {
                             width: 120,
                             height: 40,
                             color: Colors.black,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  castList[index].castOrginalName,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
-                                Text(
-                                  castList[index].characterName,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.subtitle1,
-                                ),
-                              ],
+                            child: FittedBox(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    castList[index].characterName,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context).textTheme.subtitle1,
+                                  ),
+                                  Text(
+                                    castList[index].castOrginalName,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context).textTheme.bodyText1,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],

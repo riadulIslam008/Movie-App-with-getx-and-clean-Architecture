@@ -17,7 +17,7 @@ class MoviePosterSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       top: screenHeight * 0.20,
-      left: screenWidth / 24,
+      left: screenWidth> 400? 400 / 24: screenWidth/24,
       child: Transform(
         alignment: Alignment.topRight,
         transform: Matrix4.identity()
@@ -41,7 +41,7 @@ class MoviePosterSection extends StatelessWidget {
               ),
             ),
             height: screenHeight * 0.20,
-            width: screenWidth * 0.25,
+            width: screenWidth > 400 ? 400 * 0.25 : screenWidth * 0.25,
           ),
         ),
       ),

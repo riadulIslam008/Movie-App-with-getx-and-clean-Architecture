@@ -15,7 +15,7 @@ class ErrorImageSection extends GetWidget<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FileNotFound(),
         ButtonWidget(
@@ -27,7 +27,7 @@ class ErrorImageSection extends GetWidget<HomeController> {
           buttonStyle: Theme.of(context).textTheme.subtitle1!,
           buttonWidth: screenWidth / 2,
         ),
-        SizedBox(height: screenHeight * 0.20)
+        // SizedBox(height: screenHeight * 0.20)
       ],
     );
   }

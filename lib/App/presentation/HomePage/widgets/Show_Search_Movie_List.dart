@@ -76,7 +76,7 @@ class ShowSearchMovieList extends GetWidget<HomeController> {
                                   child: GestureDetector(
                                     onTap: () {
                                       controller.movieDetailscall(
-                                          movieId: movieList[index].id);
+                                          movieId: movieList[index].id, index: 0);
                                     },
                                     child: SizedBox(
                                       width: screenWidth * 0.80 - 130,

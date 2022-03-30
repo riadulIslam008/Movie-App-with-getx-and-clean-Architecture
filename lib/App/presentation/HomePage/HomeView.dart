@@ -33,31 +33,36 @@ class HomeView extends GetWidget<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          BackGroundSection(
-            backGroundArgument: BackGroundArgument(
-              black: Colors.black,
-              screenWidth: screenWidth,
-              screenHeight: screenHeight,
-            ),
-          ),
-          BlurSection(
-            blurSectionArgument:
-                BlurSectionArgument(blackWithOpacity, 5.0, 5.0),
-          ),
+      body: Center(
+        child: SizedBox(
+          width: screenWidth> 400? 400 : screenWidth,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              BackGroundSection(
+                backGroundArgument: BackGroundArgument(
+                  black: Colors.black,
+                  screenWidth: screenWidth,
+                  screenHeight: screenHeight,
+                ),
+              ),
+              BlurSection(
+                blurSectionArgument:
+                    BlurSectionArgument(blackWithOpacity, 5.0, 5.0),
+              ),
 
-          //* foreGroud Section
-          Obx(
-            () => controller.loadingSpiner.value
-                ? LoadingSpiner()
-                : ForeGroundSection(),
-          ),
+              //* foreGroud Section
+              Obx(
+                () => controller.loadingSpiner.value
+                    ? LoadingSpiner()
+                    : ForeGroundSection(),
+              ),
 
-          //* Searchbar and Tile
-          ExpansionTileSection(),
-        ],
+              //* Searchbar and Tile
+              ExpansionTileSection(),
+            ],
+          ),
+        ),
       ),
     );
   }

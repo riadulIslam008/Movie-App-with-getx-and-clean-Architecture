@@ -7,13 +7,13 @@ import 'package:get/get.dart';
 //* AppError
 import 'package:movie_app_tmdb/App/Core/errors/AppError.dart';
 import 'package:movie_app_tmdb/App/Core/widgets/Error_Dialog.dart';
+import 'package:movie_app_tmdb/App/data/models/Hive/hive_db.dart';
 
 //* MovieDetails Entity
 import 'package:movie_app_tmdb/App/domain/entites/Movie_Details_Entity.dart';
 
 //* Movie Param
 import 'package:movie_app_tmdb/App/domain/entites/Movie_Param.dart';
-import 'package:movie_app_tmdb/App/domain/entites/Movie_entity.dart';
 import 'package:movie_app_tmdb/App/domain/entites/Video_Entity.dart';
 import 'package:movie_app_tmdb/App/domain/entites/Cast_Entity.dart';
 
@@ -35,12 +35,13 @@ import 'package:movie_app_tmdb/di/Binding.dart';
 class MovieDetailsController extends GetxController {
   final MovieRepository _movieRepository;
   final int movieID;
+  final int index;
   final bool checkFavouriteMovie;
 
   final HomeController _homeController = Get.find<HomeController>();
 
   MovieDetailsController(
-      this._movieRepository, this.movieID, this.checkFavouriteMovie);
+      this._movieRepository, this.movieID, this.checkFavouriteMovie, this.index);
   MovieDetailsEntity? movieDetailsEntity;
   List<CastEntity>? castList;
   List<VideoEntity>? videoEntity;
@@ -100,24 +101,39 @@ class MovieDetailsController extends GetxController {
     });
   }
 
-  addInFavouriteMovie() {
-    _homeController.saveInDatabase(
-      movieEntity: MovieEntity(
-        posterPath: movieDetailsEntity!.posterPath,
-        id: movieDetailsEntity!.id,
-        overview: movieDetailsEntity!.movieOverview,
-        backdropPath: movieDetailsEntity!.backDropPath,
-        title: movieDetailsEntity!.movieName,
-        adult: false,
-        voteAverage: 0.0,
-        releaseDate: movieDetailsEntity!.releaseDate,
-        language: "",
-      ),
+  // addInFavouriteMovie() {
+  //   _homeController.saveInDatabase(
+  //     movieEntity: MovieEntity(
+  //       posterPath: movieDetailsEntity!.posterPath,
+  //       id: movieDetailsEntity!.id,
+  //       overview: movieDetailsEntity!.movieOverview,
+  //       backdropPath: movieDetailsEntity!.backDropPath,
+  //       title: movieDetailsEntity!.movieName,
+  //       adult: false,
+  //       voteAverage: 0.0,
+  //       releaseDate: movieDetailsEntity!.releaseDate,
+  //       language: "",
+  //     ),
+  //   );
+  // }
+
+  void saveFavouriteMovieInHiveDb() {
+    _homeController.saveInHive(
+      movieEntity: FavouriteMovieListModel(
+          movieDetailsEntity!.posterPath,
+          movieDetailsEntity!.id,
+          movieDetailsEntity!.movieOverview,
+          movieDetailsEntity!.backDropPath,
+          movieDetailsEntity!.movieName,
+          false,
+          0.0,
+          movieDetailsEntity!.releaseDate,
+          ""),
     );
   }
 
   deleteFavoriteMovie() {
-    _homeController.deleteMovieFromDatabase(movieID: movieID);
+    _homeController.deleteMovieFromHive(movieID: index);
   }
 
   void trailerPage() {

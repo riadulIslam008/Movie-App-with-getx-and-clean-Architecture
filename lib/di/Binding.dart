@@ -1,6 +1,9 @@
 import "package:get/get.dart";
+import 'package:hive/hive.dart';
+import 'package:movie_app_tmdb/App/Core/utils/const_string.dart';
 import 'package:movie_app_tmdb/App/data/dataSources/Core/SQL_Lite.dart';
 import 'package:movie_app_tmdb/App/data/dataSources/local/Local_Data_Source.dart';
+import 'package:movie_app_tmdb/App/data/dataSources/local/Local_Hive_Data.dart';
 
 //* Cast Profile
 import 'package:movie_app_tmdb/App/presentation/Cast_Profile_Section.dart/Cast_Profile_Controller.dart';
@@ -32,22 +35,24 @@ class Binding extends Bindings {
   void dependencies() {
     Client _client = Client();
     ApiClient client = ApiClient(_client);
+    LocalHiveData hiveDb = LocalHiveDataImpl();
     LocalDatabase localDatabase = LocalDatabase.localDatabase;
     LocalDataSource localDataSource = LocalDataSourceImpl(localDatabase);
     MovieRemoteDataSources dataSources = MovieRemoteDataSourcesImple(client);
 
     MovieRepository _movieRepository =
-        MovieRepositoryImpl(dataSources, localDataSource);
+        MovieRepositoryImpl(dataSources, localDataSource, hiveDb);
 
-     Get.lazyPut<HomeController>(() => HomeController(_movieRepository));
+    Get.lazyPut<HomeController>(() => HomeController(_movieRepository));
   }
 
   void movieDetailsPage(
       {required MovieRepository movieRepository,
       required int movieID,
-      required bool favouriteMovie}) {
-    Get.lazyPut<MovieDetailsController>(
-        () => MovieDetailsController(movieRepository, movieID, favouriteMovie));
+      required bool favouriteMovie,
+      required int index}) {
+    Get.lazyPut<MovieDetailsController>(() => MovieDetailsController(
+        movieRepository, movieID, favouriteMovie, index));
   }
 
   void movieTrailerPage({required videoEntity}) {

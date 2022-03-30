@@ -11,7 +11,7 @@ class MovieInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: screenWidth * 0.22,
+      width:screenWidth > 400? 400 * 0.22 : screenWidth * 0.22,
       child: Tooltip(
         message: "$value",
         child: Column(
@@ -24,10 +24,12 @@ class MovieInfo extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headline6,
-              overflow: TextOverflow.ellipsis,
+            FittedBox(
+              child: Text(
+                value,
+                style: Theme.of(context).textTheme.headline6,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),
