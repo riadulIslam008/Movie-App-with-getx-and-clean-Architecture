@@ -1,6 +1,8 @@
 # movie_app_tmdb
-<p>While making this app i follow <a href="https://youtube.com/playlist?list=PL342JVRNQxEAcQdnNeN0JmMzfcm6VtLxS">this tutorial  </a> </p>
+<p>While making this app i follow <a href="https://youtube.com/playlist?list=PL342JVRNQxEAcQdnNeN0JmMzfcm6VtLxS">this tutorial  </a> for Clean Architechur</p>
 
+<h4>Live Demo From <a herf="https://movie-details-app.web.app/"> HERE </a> </h4>
+  
 <h2>App Details </h2>
 This is made by TMDB API.In this app u will get popular movie, trending movie, upcoming movie.And also u can see movie trailer from youtube api. 
 <h2> Core Feature </h2>
