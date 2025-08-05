@@ -22,8 +22,11 @@ Try the app online: [https://movie-details-app.web.app/](https://movie-details-a
 -- Watch teasers and trailers embedded using YouTube API
 -- Favorite movie list saved locally via Hive database
 -- User feedback submission through Wiredash
+---
 
+---
 ## 🛠 Tech Stack
+
 -- Flutter for UI
 -- GetX for state management & dependency injection
 -- Hive for local NoSQL storage
@@ -39,7 +42,7 @@ Try the app online: [https://movie-details-app.web.app/](https://movie-details-a
 <p align="center">
 
 <img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image1.webp" height="300">
-<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image2.webp" height="100%">
+<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image2.webp" height="300">
 <img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image3.webp" height="300">
 <img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image4.webp" height="300">
 <img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image5.webp" height="300">
