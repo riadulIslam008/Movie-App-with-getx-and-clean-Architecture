@@ -14,59 +14,40 @@ Try the app online: [https://movie-details-app.web.app/](https://movie-details-a
 
 ## 🎯 Features
 
-    Browse Popular, Trending, Now Playing, and Upcoming movies
-
-    Dynamic background that updates based on the first selected movie
-
-    Search movies live via TMDB API
-
-    View movie details with cover photo, poster, genre, release date, rating, storyline, and cast
-
-    Tap cast roles to view full biography and filmography
-
-    Watch teasers and trailers embedded using YouTube API
-
-    Favorite movie list saved locally via Hive database
-
-    User feedback submission through Wiredash
+-- Browse Popular, Trending, Now Playing, and Upcoming movies
+-- Dynamic background that updates based on the first selected movie
+-- Search movies live via TMDB API
+-- View movie details with cover photo, poster, genre, release date, rating, storyline, and cast
+-- Tap cast roles to view full biography and filmography
+-- Watch teasers and trailers embedded using YouTube API
+-- Favorite movie list saved locally via Hive database
+-- User feedback submission through Wiredash
 
 ## 🛠 Tech Stack
+-- Flutter for UI
+-- GetX for state management & dependency injection
+-- Hive for local NoSQL storage
+-- SQLite for persistent relational storage
+-- Dartz & Equatable for clean architecture tooling
+-- YouTube Player IFrame for trailer playback
+-- Wiredash for in-app user feedback
 
-    Flutter for UI
-
-    GetX for state management & dependency injection
-
-    Hive for local NoSQL storage
-
-    SQLite for persistent relational storage
-
-    Dartz & Equatable for clean architecture tooling
-
-    YouTube Player IFrame for trailer playback
-
-    Wiredash for in-app user feedback
 ---
 
 ## 📱 Screenshots
 
-<table>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image1.webp" width="100%"></td>
-    <td><img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image2.webp" width="100%"></td>
-  </tr>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image3.webp" width="100%"></td>
-    <td><img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image4.webp" width="100%"></td>
-  </tr>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image5.webp" width="100%"></td>
-    <td><img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image6.webp" width="100%"></td>
-  </tr>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image7.webp" width="100%"></td>
-    <td><img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image8.webp" width="100%"></td>
-  </tr>
-</table>
+<p align="center">
+
+<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image1.webp" height="300">
+<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image2.webp" height="100%">
+<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image3.webp" height="300">
+<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image4.webp" height="300">
+<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image5.webp" height="300">
+<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image6.webp" height="300">
+<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image7.webp" height="300">
+<img src="https://raw.githubusercontent.com/riadulIslam008/Amer-School-Images/main/movie-app/image8.webp" height="300">
+
+</p>
 
 ---
 
