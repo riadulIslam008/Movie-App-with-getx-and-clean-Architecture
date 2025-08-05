@@ -13,7 +13,7 @@ Try the app online: [https://movie-details-app.web.app/](https://movie-details-a
 ---
 
 ## 🎯 Features
-
+```
 -- Browse Popular, Trending, Now Playing, and Upcoming movies
 -- Dynamic background that updates based on the first selected movie
 -- Search movies live via TMDB API
@@ -23,10 +23,11 @@ Try the app online: [https://movie-details-app.web.app/](https://movie-details-a
 -- Favorite movie list saved locally via Hive database
 -- User feedback submission through Wiredash
 ---
-
+```
 ---
-## 🛠 Tech Stack
 
+## 🛠 Tech Stack
+```
    Flutter for UI
    GetX for state management & dependency injection
    Hive for local NoSQL storage
@@ -34,7 +35,7 @@ Try the app online: [https://movie-details-app.web.app/](https://movie-details-a
    Dartz & Equatable for clean architecture tooling
    YouTube Player IFrame for trailer playback
    Wiredash for in-app user feedback
-
+```
 ---
 
 ## 📱 Screenshots
