@@ -27,13 +27,13 @@ Try the app online: [https://movie-details-app.web.app/](https://movie-details-a
 ---
 ## 🛠 Tech Stack
 
--- Flutter for UI
--- GetX for state management & dependency injection
--- Hive for local NoSQL storage
--- SQLite for persistent relational storage
--- Dartz & Equatable for clean architecture tooling
--- YouTube Player IFrame for trailer playback
--- Wiredash for in-app user feedback
+   Flutter for UI
+   GetX for state management & dependency injection
+   Hive for local NoSQL storage
+   SQLite for persistent relational storage
+   Dartz & Equatable for clean architecture tooling
+   YouTube Player IFrame for trailer playback
+   Wiredash for in-app user feedback
 
 ---
 
